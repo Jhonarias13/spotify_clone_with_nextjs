@@ -24,7 +24,7 @@ function Login({ providers }) {
         <small className="absolute top-[6.5rem] right-[30rem] font-extrabold uppercase text-lg text-white hidden lg:block">
           Clone
         </small>
-
+        {console.log(providers)}
         {Object.values(providers).map((provider: any) => (
           <div
             key={provider.name}
@@ -41,7 +41,6 @@ function Login({ providers }) {
 
       <footer className='w-100 h-100'>
         <div className="text-center text-white font-mono flex items-center">
-          <p> &copy; 2022 spotify clone &nbsp; </p>
           <a href="https://www.linkedin.com/in/jhon-freiman-arias-b87021125/" rel='noopener noreferrer' target="_blank" className="text-white font-mono hover:cursor-pointer hover:underline underline-offset-4">By Jhon Freiman Arias</a>
         </div>
       </footer>
