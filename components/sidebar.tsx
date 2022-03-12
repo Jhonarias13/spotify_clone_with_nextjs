@@ -4,7 +4,8 @@ import {
   LibraryIcon,
   PlusCircleIcon,
   HeartIcon,
-  RssIcon
+  RssIcon,
+  LoginIcon
 } from "@heroicons/react/outline";
 
 import { signOut, useSession } from 'next-auth/react';
@@ -20,7 +21,9 @@ function Sidebar() {
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
 
 
-  console.log('le diste click a este link ==>', playlistId);
+  let saveLocalStorage = (id: string) => {
+    localStorage.setItem('playlist', String(id));
+  }
 
   useEffect(() => {
     if (SpotifyApi.getAccessToken()) {
@@ -31,12 +34,8 @@ function Sidebar() {
   }, [session, SpotifyApi])
 
   return (
-    <div className="text-gray-500 p-5 text-sm lg:text-xs border-r border-gray-900 overflow-y-scroll h-screen sm:max-w-[12rem] lg:max-w-[15rem]">
+    <div className="text-gray-500 p-5 text-sm lg:text-xs border-r border-gray-900 overflow-y-scroll h-screen sm:max-w-[12rem] lg:max-w-[15rem] hidden md:inline-flex">
       <div className="space-y-3">
-        <button className="flex items-center space-x-2 hover:text-white" onClick={() => signOut({ callbackUrl: '/' })}>
-          <HomeIcon className="h-5 w-5" />
-          <p>Log out</p>
-        </button>
         <button className="flex items-center space-x-2 hover:text-white">
           <HomeIcon className="h-5 w-5" />
           <p>Home</p>
@@ -68,12 +67,13 @@ function Sidebar() {
 
         {/* playlist... */}
         {playlist.map((playlist: any) => (
-          <p
-            key={playlist.id}
-            onClick={() => { setPlaylistId(playlist.id) }}
-            className="cursor-pointer hover:text-white">
-            {playlist.name}
-          </p>
+          <div key={playlist.id} onClick={() => { setPlaylistId(playlist.id), saveLocalStorage(playlist.id) }} className="flex cursor-pointer hover:text-white items-center">
+            <img className="md:w-5 md:h-5 lg:w-7 lg:h-7 rounded-full mr-1.5" src={playlist?.images?.[0]?.url} />
+            <p
+              className=" line-clamp-2">
+              {playlist.name}
+            </p>
+          </div>
         ))}
 
       </div>

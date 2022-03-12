@@ -9,7 +9,7 @@ function Login({ providers }) {
     >
       <div className="bg-black w-screen h-40 flex items-center justify-center relative">
         <img
-          className="w-16 md-20 lg:w-24 bg-white rounded-full mr-7 md:mr-12 "
+          className="w-16 md-20 lg:w-24 bg-black rounded-full mr-7 md:mr-12 "
           src="https://links.papareact.com/9xl"
           alt="spotify logo"
         />
